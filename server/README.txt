@@ -1,0 +1,1 @@
+database cluster ke wajah se heroku mein deploy nhi kar paaye
