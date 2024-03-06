@@ -1,21 +1,20 @@
-import express from 'express';
-import http from 'http';
-import cors from 'cors';
 import { Server } from 'socket.io';
 
-const app = express();
-app.use(cors()); // Add this line to enable CORS for all routes
+import Connection from './database/db.js';
 
-const server = http.createServer(app);
-const io = new Server(server);
+import { getDocument, updateDocument } from './controller/document-controller.js'
 
-// Your Socket.IO server logic here
+const PORT = 9000;
 
-const PORT = process.env.PORT || 9000;
+Connection();
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const io = new Server(PORT, {
+    cors: {
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST'],
+    }
 });
+
 
 io.on('connection', socket => {
     socket.on('get-document', async documentId => {

@@ -41,8 +41,6 @@ const Editor = () => {
 
     useEffect(() => {
         const quillServer = new Quill('#container', { theme: 'snow', modules: { toolbar: toolbarOptions }});
-        quillServer.disable();
-        quillServer.setText('Loading the document...')
         setQuill(quillServer);
     }, []);
 
